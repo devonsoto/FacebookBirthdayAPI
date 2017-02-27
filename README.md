@@ -1,14 +1,15 @@
 # FacebookBirthdayReplies
 
 
-#Author
+-Author
 Devon Soto
 deso8093@colorado.edu
 
 
-Using Facebook's API the script downloads the user's name and id.
-It checks the User's wall and replies to any post that are relating to wishing him a happy birthday.
+*FacebookReplies.py:* Using Facebook's API, this scrits downloads the post on their wall. It then checks to see if the post has a message. If the message contains a key words then it will reply to the user. 
 
-I have been able to download any my wall posts, check to see if the post is made on my birthday, and to see if it is related to my birthday.
+-[x] Download and collect user's wall 
+-[x] Check to see if it is a valid post/message
+-[ ] Get poster's name 
+-[ ] Reply to the poster with a message of my choice
 
-The steps that I need to complete the project is to just post a Thank you comment to the user.
