@@ -1,7 +1,7 @@
 # FacebookBirthdayReplies
 
 
-* Author
+* Author:
 Devon Soto
 deso8093@colorado.edu
 
