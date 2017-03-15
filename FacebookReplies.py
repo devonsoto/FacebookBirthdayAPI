@@ -10,17 +10,24 @@
 
 import requests
 import datetime
+import random
 from pprint import pprint
 
 #get user api key from facebook developers webstie
-api_key = "EAAE47dSjxosBAD6tqACdZA2MptQe7B5Kp3ZCZBwITHcdYIAuinb4m7R7agSIkVNoZAvOHhkAZBrEmfeZBKqX6HiJYb4QbzoQD7FUE8FLOL62lLvJev9sxCzFfVGPJKEiDHtCJpuTQOybqqxYmeZCAKS8Tq1XJGoU4sbHrQLdKyLvefOtkUql3DWKENlutnnH0sZD"
+api_key = "EAAE47dSjxosBANsTblltqdKlA3iXTNNgma9unZA9O2UsMWWxYHjtQBrAcVy1qdFJJRcI88ZCNP3FuZAWIEXIuRLgKyKsskbcFczyPs4ZBZA4MFOsZA2LEyYHlKxBFOsZCwMZAXDf9pa85x0VQcMNbCVeQajCN0WPo3QNmCrifdbwK8XvXzCFE2kJhsgcEnpZBsUEZD"
 
 #Birthday must be in this format since this is how the created_time is on json
-birthday = "2016-03-15"
+birthday = "2017-03-15"
 
 #list of key words.
 birthday_words = ["Happy", "happy", "birthday", "bday", "feliz", "cumpleaños", "cumpleanos", "great day", "good day"]
 basic_words = ["hey", "family", "added", "president", "remember"]
+message_reply = ["Thank you :)", "Thanks buddy, I appreciate it!", "Thanks haha. :)", "Thank you :)", "Thanks hope to see you soon haha", "Aww Thanks buddy"]
+
+#number of birthday post
+num_post = 0
+birthday_post = []
+getFeeds = True
 
 
 
@@ -38,6 +45,7 @@ pprint(data)
 def get_date(post, birthday):
     time = post['created_time']
     time = time[:10]
+    print("This is the time: {}".format(time))
     if(birthday == time[:10]):
         return True
 
@@ -59,19 +67,39 @@ def has_keyword(post):
         return True
 
 def bday_post_list(post,birthday):
-    birthday_post = []
+    #print("This is the paging ----- {} \n".format(post['paging']['next']))
+    #pprint((requests.get(post['paging']['next'])).json())
     for post in post['data']:
+
+
+        print(post['created_time'])
         if(get_date(post,birthday) and has_keyword(post)):
+            num_post += 1
+            print(post['message'])
             birthday_post.append(post['id'])
+
+
+
+
 
     return birthday_post
 
+def reply_to_post(posts):
+    for post in posts:
+        post_url = 'https://graph.facebook.com/%s/comments' % post['post_id']
+        random_num = random.randint(a, len(message_reply))
+        post_message = message_reply(random_num)
+        parameters = {'access_token': api_key, 'message': post_message}
+        post = requests.post(post_url, data = parameters )
+
 
 #Get user feed data
-request_url = "https://graph.facebook.com/me/feed?access_token=" + api_key
+request_url = "https://graph.facebook.com/me/feed?access_token=" + api_key + "&limit=3"
 r = requests.get(request_url)
 data = r.json()
 
+
 #running code and printing out which post
+pprint(data)
 birthday_post = bday_post_list(data,birthday)
 print(birthday_post)
