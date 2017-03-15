@@ -14,7 +14,7 @@ import random
 from pprint import pprint
 
 #get user api key from facebook developers webstie
-api_key = "Your key here"
+api_key = "Your api key"
 
 #Birthday must be in this format since this is how the created_time is on json
 birthday = "2017-03-15"
@@ -25,7 +25,6 @@ basic_words = ["hey", "family", "added", "president", "remember"]
 message_reply = ["Thank you :)", "Thanks buddy, I appreciate it!", "Thanks haha. :)", "Thank you :)", "Thanks hope to see you soon haha", "Aww Thanks buddy"]
 
 #number of birthday post
-num_post = 0
 birthday_post = []
 getFeeds = True
 
@@ -67,6 +66,7 @@ def has_keyword(post):
         return True
 
 def bday_post_list(post,birthday):
+    num_post = 0
     #print("This is the paging ----- {} \n".format(post['paging']['next']))
     #pprint((requests.get(post['paging']['next'])).json())
     for post in post['data']:
@@ -75,7 +75,7 @@ def bday_post_list(post,birthday):
         print(post['created_time'])
         if(get_date(post,birthday) and has_keyword(post)):
             num_post += 1
-            print(post['message'])
+            #print(post['message'])
             birthday_post.append(post['id'])
 
 
