@@ -14,7 +14,7 @@ import random
 from pprint import pprint
 
 #get user api key from facebook developers webstie
-api_key = "EAAE47dSjxosBANsTblltqdKlA3iXTNNgma9unZA9O2UsMWWxYHjtQBrAcVy1qdFJJRcI88ZCNP3FuZAWIEXIuRLgKyKsskbcFczyPs4ZBZA4MFOsZA2LEyYHlKxBFOsZCwMZAXDf9pa85x0VQcMNbCVeQajCN0WPo3QNmCrifdbwK8XvXzCFE2kJhsgcEnpZBsUEZD"
+api_key = "Your key here"
 
 #Birthday must be in this format since this is how the created_time is on json
 birthday = "2017-03-15"
