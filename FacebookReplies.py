@@ -14,7 +14,7 @@ import random
 from pprint import pprint
 
 #get user api key from facebook developers webstie
-api_key = "Your api key"
+api_key = "EAAE47dSjxosBAHConwG26QeVCcRtlG6cQpNrbbLX1HYOXebP1T3hUZAdSZAKQ9ZAnUZC3sf3RnEFN4CIipSRzKihRwp9gE3Pma8gL92mdpoNf4UAJRZAH00g8AEd2ZCtroZAZBo94DrTqDGcv5ccpDxyCBZCTCPPi49ZBY9hFRNV0QZBlbLEJgTJqUJIvLYPGkYUWsZD"
 
 #Birthday must be in this format since this is how the created_time is on json
 birthday = "2017-03-15"
@@ -25,7 +25,6 @@ basic_words = ["hey", "family", "added", "president", "remember"]
 message_reply = ["Thank you :)", "Thanks buddy, I appreciate it!", "Thanks haha. :)", "Thank you :)", "Thanks hope to see you soon haha", "Aww Thanks buddy"]
 
 #number of birthday post
-birthday_post = []
 getFeeds = True
 
 
@@ -44,7 +43,6 @@ pprint(data)
 def get_date(post, birthday):
     time = post['created_time']
     time = time[:10]
-    print("This is the time: {}".format(time))
     if(birthday == time[:10]):
         return True
 
@@ -67,22 +65,19 @@ def has_keyword(post):
 
 def bday_post_list(post,birthday):
     num_post = 0
+    birthday_post = []
+
     #print("This is the paging ----- {} \n".format(post['paging']['next']))
     #pprint((requests.get(post['paging']['next'])).json())
     for post in post['data']:
 
-
-        print(post['created_time'])
         if(get_date(post,birthday) and has_keyword(post)):
+            print(post['created_time'])
+
             num_post += 1
             #print(post['message'])
             birthday_post.append(post['id'])
 
-
-
-
-
-    return birthday_post
 
 def reply_to_post(posts):
     for post in posts:
@@ -94,7 +89,7 @@ def reply_to_post(posts):
 
 
 #Get user feed data
-request_url = "https://graph.facebook.com/me/feed?access_token=" + api_key + "&limit=3"
+request_url = "https://graph.facebook.com/me/feed?access_token=" + api_key + "&limit=5"
 r = requests.get(request_url)
 data = r.json()
 
